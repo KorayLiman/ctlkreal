@@ -8,6 +8,7 @@ import 'package:ctlk2/pages/FullScreenImage.dart';
 
 import 'package:ctlk2/viewmodels/chatmodel.dart';
 import 'package:ctlk2/viewmodels/usermodel.dart';
+import 'package:ctlk2/widgets/PlatformSensitiveCommentDeleteButton.dart';
 
 import 'package:flutter/cupertino.dart';
 
@@ -297,6 +298,24 @@ class _DetailsPageState extends State<DetailsPage> {
                                           var currentComment =
                                               snapshot.data![index];
                                           return ListTile(
+                                              onLongPress: () {
+                                                if (currentComment.OwnerID ==
+                                                    _usermodel.user!.UserID) {
+                                                  PlatformSensitiveCommentDeleteButton(
+                                                      title: "Sil",
+                                                      chat: widget.chat,
+                                                      OwnerID: _usermodel
+                                                          .user!.UserID,
+                                                      callback: () {
+                                                        setState(() {});
+                                                      },
+                                                      content:
+                                                          "Yorumu silmek istediğinizden emin misiniz ?",
+                                                      mainButtonText: "Evet",
+                                                      secondaryButtonText:
+                                                          "Hayır").show(context);
+                                                }
+                                              },
                                               subtitle:
                                                   FutureBuilder<CuTalkUser>(
                                                 builder: (context, snapshot) {
